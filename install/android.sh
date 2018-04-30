@@ -5,5 +5,7 @@ if [[ "$OSTYPE" != *"android" ]]; then
     exit 1
 fi
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
 # install some packages
-apt install -f $(cat ../termux/pkg.list)
+apt install -f $(cat $DIR/../termux/pkg.list)
