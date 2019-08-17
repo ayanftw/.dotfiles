@@ -1,0 +1,114 @@
+%include ~/.dotfiles/hg/$HOST.rc
+
+[ui]
+ignore.global = ~/.hgignore_global
+
+[extensions]
+progress=
+color=
+graphlog=
+rebase=
+shelve=
+purge=
+hgk=
+histedit=
+pager=
+fetch=
+strip=
+
+[committemplate]
+changeset = {desc}\n\n
+    HG: Enter commit message.  Lines beginning with 'HG:' are removed.
+    HG: {extramsg}
+    HG: --
+    HG: user: {author}\n{ifeq(p2rev, "-1", "",
+   "HG: branch merge\n")
+   }HG: branch '{branch}'\n{if(currentbookmark,
+   "HG: bookmark '{currentbookmark}'\n")  }{subrepos %
+   "HG: subrepo {subrepo}\n"              }{file_adds %
+   "HG: added {file}\n"                   }{file_mods %
+   "HG: changed {file}\n"                 }{file_dels %
+   "HG: removed {file}\n"                 }{if(files, "",
+   "HG: no files changed\n")}
+
+[hooks]
+update.pyc = find . -name "*.py[co]" -delete
+update.pycache = find . -type d -name "__pycache__" -delete
+changegroup = hg diff --stat -r $HG_NODE -r tip
+pre-merge = local=$(hg branch); other=$(echo $HG_ARGS | cut -d ' ' -f2); read -p "Are you sure you want to merge [32;1m'$other'[0m into [33;1m'$local?'[0m ([32my[0m/[31mn[0m): " REPLY; echo $REPLY | grep -q 'y' 
+
+[pager]
+pager = LESS='FrX' less
+attend = annotate, cat, diff, export, glog, log, qdiff, status
+
+[merge-tools]
+vimdiff.executable = vimdiff
+vimdiff.args = -f -d $output -M $local $base $other -c "wincmd J" -c "set modifiable" -c "set write"
+vimdiff.premerge = keep
+
+[revsetalias]
+wip = (parents(not public()) or not public() or . or head()) and (not obsolete() or unstable()^) and not closed()
+
+#Custom colours
+[color]
+mode=terminfo
+
+color.branchblue=39
+color.changeset=45
+color.orange=202
+color.lightyellow=191
+color.tagblue=75
+color.brightyellow=226
+color.summary=254
+color.parent=250
+color.date=245
+color.user=245
+color.unknown=245
+color.inactive=245
+
+
+#Colours for each label
+log.branch=branchblue bold
+log.changeset=changeset bold
+log.summary=lightyellow
+log.description=lightyellow
+log.bookmark=green
+log.summary=summary
+log.tag=tagblue
+log.date=date
+log.user=user
+log.parent=parent
+log.activebookmark = green bold underline
+
+#changeset.public=orange bold
+changeset.public=
+changeset.secret=blue bold
+changeset.draft=brightyellow bold
+
+desc.here=bold blue_background
+status.unknown=unknown
+status.modified=branchblue bold
+
+branches.inactive=inactive
+branches.current=branchblue bold
+
+custom.rev = changeset
+custom.date = date
+custom.branch = branchblue
+
+[alias]
+wip = log --graph --rev=wip --style ~/.dotfiles/hgrc/templates/wip.rc
+fr = !local=$(hg branch); other=$1; msg="Merge $other into $local"; hg merge $other && hg commit -m "$msg" && echo "Committed with: $msg"
+int = !local=$(hg branch); other=$1; msg="Merge $local into $other"; hg update $other && hg merge $local && hg commit -m "$msg" && echo "Committed with: $msg" ; hg update $local
+pdiff = log -M -r "reverse(ancestors(max(branch(.))) - ancestors($1))" --style changelog
+slog = log --template "{label('custom.rev', node)} {label('custom.date', date|isodate)}\t[{label('custom.branch', branch)}]\t{desc|tabindent}\n" -l 10
+
+[graph]
+# 2px width
+default.width = 2
+# red color
+default.color = FF0000
+
+[web]
+allow_archive = bz2, gz, zip
+deny_push = *

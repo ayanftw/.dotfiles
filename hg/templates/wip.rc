@@ -1,0 +1,16 @@
+wbrch = '{label("log.branch",
+                 ifeq(branch, "default",
+                      "",
+                      branch))}'
+wcset = '{label("changeset.{phase}",
+                rev)}'
+wuser = '{label("grep.user",
+              author|user)}'
+wtags = '{label("log.tag",
+              if(tags," {tags}"))}'
+wbook = '{bookmarks % "{ifeq(bookmark, currentbookmark,
+                             label('log.activebookmark', bookmark),
+                             label('log.bookmark', bookmark))} "}'
+wdesc = '{label(ifcontains(rev, revset('parents()'), 'desc.here'),
+              desc|firstline)}'
+changeset = '{wbrch} {wcset} {wuser} {wtags} {wbook}\n{wdesc}'
