@@ -1,0 +1,218 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+hook_add = '''
+  nmap <silent>j <Plug>(accelerated_jk_gj)
+  nmap <silent>k <Plug>(accelerated_jk_gk)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'tpope/vim-unimpaired'
+
+[[plugins]]
+repo = 'ludovicchabant/vim-lawrencium'
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'
+hook_add = '''
+    execute 'source' expand(g:plugin_settings . 'ctrlp.vimrc')
+'''
+
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = 'md'
+
+[[plugins]]
+repo = 'sjl/gundo.vim'
+hook_add = '''
+    map <leader>g :GundoToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Valloric/MatchTagAlways'
+
+#[[plugins]]
+#repo = 'neomake/neomake'
+#hook_add = '''
+    #let g:neomake_open_list = 2
+    #let g:neomake_warning_sign = {
+      #\ 'text': "\uf12a",
+      #\ 'texthl': 'NeomakeWarningSign',
+      #\ }
+
+    #augroup my_error_signs
+        #au!
+        #autocmd ColorScheme * hi NeomakeErrorSign ctermfg=160 guifg=red | hi NeomakeWarningSign ctermfg=yellow guifg=yellow
+    #augroup END
+
+    #call neomake#configure#automake('nrw', 0)
+    #let b:neomake_python_enabled_makers = ['flake8']
+#'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+hook_add = '''
+    nmap <leader>w <Plug>(ale_fix)
+    
+    let g:ale_echo_msg_format = '[%linter%:%code%] %s [%severity%]'
+    let g:ale_fixers = {'python': ['black', 'isort', 'trim_whitespace', 'remove_trailing_lines']}
+
+    let g:ale_python_flake8_executable=expand('~/.virtualenvs/neovim-python3/bin/flake8')
+    let g:ale_python_isort_executable=expand('~/.virtualenvs/neovim-python3/bin/isort')
+    let g:ale_python_mypy_executable=expand('~/.virtualenvs/neovim-python3/bin/mypy')
+    let g:ale_python_pylint_executable=expand('~/.virtualenvs/neovim-python3/bin/pylint')
+'''
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'tpope/vim-ragtag'
+
+[[plugins]]
+repo = 'junegunn/limelight.vim'
+hook_add = '''
+    map <leader>l :Limelight!!<CR>
+    nmap <leader>ll <Plug>(Limelight)
+    xmap <leader>ll <Plug>(Limelight)
+    let g:limelight_conceal_ctermfg = 240
+    let g:limelight_conceal_guifg = 'DarkGray'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_add = '''
+    let g:airline_powerline_fonts = 1
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'groenewege/vim-less'
+
+[[plugins]]
+repo = 'hynek/vim-python-pep8-indent'
+
+[[plugins]]
+repo = 'jamessan/vim-gnupg'
+
+[[plugins]]
+repo = 'mileszs/ack.vim'
+hook_add = '''
+    let g:ackprg = 'ag --nogroup --nocolor --column --vimgrep'
+    let g:ack_autoclose = 1
+    map <leader>a :Ack!<Space>
+    map <leader>aw :AckWindow!<Space>
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+hook_add = '''
+    let g:NERDCustomDelimiters = {
+        \    'python': { 'left': '# ', 'leftAlt': '#' },
+        \}
+'''
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'
+
+[[plugins]]
+repo = 'Rykka/InstantRst'
+
+[[plugins]]
+repo = 'vim-scripts/camelcasemotion'
+hook_add = '''
+    map <silent> w <Plug>CamelCaseMotion_w
+    map <silent> b <Plug>CamelCaseMotion_b
+    map <silent> e <Plug>CamelCaseMotion_e
+    sunmap w
+    sunmap b
+    sunmap e
+'''
+
+[[plugins]]
+repo = 'ninrod/ninscratch-vim'
+hook_add = '''
+    nnoremap gs :NinScratch<CR>
+'''
+
+[[plugins]]
+repo = 'sonph/onehalf'
+rtp = 'vim'
+
+[[plugins]]
+repo = 'francoiscabrol/ranger.vim'
+hook_add = '''
+    let g:ranger_map_keys = 0
+    map <leader>f :Ranger<CR>
+'''
+
+[[plugins]]
+repo = 'romainl/vim-qf'
+hook_add = '''
+    let g:qf_auto_open_quickfix = 0
+    let g:qf_auto_open_loclist = 0
+'''
+
+[[plugins]]
+repo = 'cakebaker/scss-syntax.vim'
+
+#[[plugins]]
+#repo = 'Alok/notational-fzf-vim'
+#hook_add = '''
+    #let g:nv_search_paths = ['~/code', 'docs.md','./notes.md']
+#'''
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --bin'
+merged = 0
+
+[[plugins]]
+repo = 'tpope/vim-cucumber'
+
+[[plugins]]
+repo = 'christianrondeau/vim-base64'
+
+[[plugins]]
+repo = 'ambv/black'
+hook_add = '''
+    let g:black_linelength = 80
+    let g:black_virtualenv = expand('~/.virtualenvs/neovim-python3')
+'''
+
+
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
+
+[[plugins]]
+repo = 'mhinz/vim-signify'
+hook_add = '''
+    let g:signify_realtime = 1
+    let g:signify_vcs_list = [ 'git', 'hg' ]
+'''
+
+[[plugins]]
+repo = 'mhinz/vim-startify'
+hook_add = '''
+    let g:startify_fortune_use_unicode = 1
+    function! s:filter_header(lines) abort                                       
+        let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))          
+        let centered_lines = map(copy(a:lines),                                  
+            \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')        
+        return centered_lines                                                    
+    endfunction                                                                  
+    let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
+'''

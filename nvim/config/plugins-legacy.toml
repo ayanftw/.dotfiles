@@ -1,0 +1,14 @@
+[[plugins]]
+repo = 'Valloric/YouCompleteMe' 
+build = 'python install.py'
+hook_add = '''
+    execute 'source' expand(g:plugin_settings . 'youcompleteme.vimrc')
+'''
+
+[[plugins]]
+repo = 'sirver/ultisnips'
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+
