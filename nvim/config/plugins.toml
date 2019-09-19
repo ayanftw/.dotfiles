@@ -21,9 +21,6 @@ repo = 'tpope/vim-fugitive'
 repo = 'tpope/vim-unimpaired'
 
 [[plugins]]
-repo = 'ludovicchabant/vim-lawrencium'
-
-[[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
 hook_add = '''
     execute 'source' expand(g:plugin_settings . 'ctrlp.vimrc')
