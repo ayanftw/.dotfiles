@@ -213,3 +213,9 @@ hook_add = '''
     endfunction                                                                  
     let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
 '''
+
+[[plugins]]
+repo = 'dominikduda/vim_current_word'
+hook_add = '''
+    let g:vim_current_word#highlight_current_word = 1
+'''
