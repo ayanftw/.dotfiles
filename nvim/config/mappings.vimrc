@@ -31,7 +31,6 @@ nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 nnoremap <leader>r :call NumberToggle()<cr>
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
-nnoremap <c-_> :FZF<cr>
 
 " Terminal settings
 tnoremap <Leader><ESC> <C-\><C-n>
