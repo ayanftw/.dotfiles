@@ -23,11 +23,11 @@ hook_add = '''
     nnoremap <leader>g :Git<CR>
 '''
 
-[[plugins]]
-repo = 'ctrlpvim/ctrlp.vim'
-hook_add = '''
-    execute 'source' expand(g:plugin_settings . 'ctrlp.vimrc')
-'''
+#[[plugins]]
+#repo = 'ctrlpvim/ctrlp.vim'
+#hook_add = '''
+    #execute 'source' expand(g:plugin_settings . 'ctrlp.vimrc')
+#'''
 
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -124,7 +124,7 @@ repo = 'jamessan/vim-gnupg'
 [[plugins]]
 repo = 'mileszs/ack.vim'
 hook_add = '''
-    let g:ackprg = 'ag --nogroup --nocolor --column --vimgrep'
+    let g:ackprg = 'rg --no-heading --vimgrep'
     let g:ack_autoclose = 1
     map <leader>a :Ack!<Space>
     map <leader>aw :AckWindow!<Space>
@@ -189,9 +189,14 @@ repo = 'cakebaker/scss-syntax.vim'
 #'''
 
 [[plugins]]
-repo = 'junegunn/fzf'
-build = './install --bin'
-merged = 0
+repo = 'junegunn/fzf.vim'
+hook_source = '''
+    set runtimepath+=/usr/share/doc/fzf/examples/
+'''
+hook_add = '''
+    map <leader>b :Buffers<CR>
+    map <c-p> :Files<CR>
+'''
 
 [[plugins]]
 repo = 'tpope/vim-cucumber'
@@ -239,3 +244,12 @@ hook_add = '''
 
 [[plugins]]
 repo = 'prettier/vim-prettier'
+
+[[plugins]]
+repo = 'farmergreg/vim-lastplace'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'

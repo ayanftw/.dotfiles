@@ -28,7 +28,7 @@ if dein#load_state(bundlepath)
 endif
 
 " check for external programs required by plugins
-for i in ['ag', 'ranger']
+for i in ['rg', 'ranger']
     if !executable(i)
         echo i . " not in path - please install"
     endif

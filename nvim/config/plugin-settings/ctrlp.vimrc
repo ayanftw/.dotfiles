@@ -34,5 +34,6 @@ let g:ctrlp_prompt_mappings = {
     \ 'PrtSelectMove("k")':   ['<c-k>',],
     \}
 
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_user_command = 'rg --files %s'
+let g:ctrlp_use_caching = 0
 
