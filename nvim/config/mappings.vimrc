@@ -39,3 +39,25 @@ augroup insert_mode_in_terminal " {
     autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END " }
 
+map <leader>b :Buffers<CR>
+map <c-p> :Files<CR>
+
+nnoremap <leader>g :Git<CR>
+
+nmap <leader>w <Plug>(ale_fix)
+
+map <leader>l :Limelight!!<CR>
+nmap <leader>ll <Plug>(Limelight)
+xmap <leader>ll <Plug>(Limelight)
+
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+
+nnoremap gs :NinScratch<CR>
+
+nmap <leader>v :Vista<CR>
+nmap <leader>V :Vista!!<CR>
