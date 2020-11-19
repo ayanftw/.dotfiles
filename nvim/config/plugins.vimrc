@@ -16,12 +16,14 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'sonph/onehalf', {'rtp': 'vim' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-fugitive'
 Plug 'dense-analysis/ale'
 Plug 'tpope/vim-surround'
 Plug 'junegunn/limelight.vim'
 Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'ninrod/ninscratch-vim'
 Plug 'romainl/vim-qf'
@@ -33,9 +35,11 @@ Plug 'liuchengxu/vista.vim'
 Plug 'numirias/semshi'
 Plug 'sheerun/vim-polyglot'
 Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-python'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocInstall coc-python coc-css coc-tailwindcss coc-yaml coc-json'}
 Plug 'mhinz/vim-startify'
 Plug 'jmcantrell/vim-virtualenv'
+Plug 'hashivim/vim-terraform'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 call plug#end()
 
@@ -57,13 +61,13 @@ let g:ale_fixers = {
     \    'markdown': ['prettier', 'trim_whitespace', 'remove_trailing_lines'],
     \    'vue': ['prettier', 'trim_whitespace', 'remove_trailing_lines'],
     \    'yaml': ['prettier', 'trim_whitespace', 'remove_trailing_lines'],
-    \    'html': ['prettier', 'trim_whitespace', 'remove_trailing_lines'],
+    \    'html': ['trim_whitespace', 'remove_trailing_lines'],
     \}
 
-let g:ale_python_flake8_executable=expand('~/.virtualenvs/neovim-python3/bin/flake8')
-let g:ale_python_black_executable=expand('~/.virtualenvs/neovim-python3/bin/black')
-let g:ale_python_mypy_executable=expand('~/.virtualenvs/neovim-python3/bin/mypy')
-let g:ale_python_pylint_executable=expand('~/.virtualenvs/neovim-python3/bin/pylint')
+"let g:ale_python_flake8_executable=expand('~/.virtualenvs/neovim-python3/bin/flake8')
+"let g:ale_python_black_executable=expand('~/.virtualenvs/neovim-python3/bin/black')
+"let g:ale_python_mypy_executable=expand('~/.virtualenvs/neovim-python3/bin/mypy')
+"let g:ale_python_pylint_executable=expand('~/.virtualenvs/neovim-python3/bin/pylint')
 
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -171,3 +175,13 @@ function! s:filter_header(lines) abort
     return centered_lines                                                    
 endfunction                                                                  
 let g:startify_custom_header = s:filter_header(startify#fortune#cowsay())
+
+" Nerdtree
+" let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Toggle
+nnoremap <silent> <C-b> :NERDTreeToggle<CR>
