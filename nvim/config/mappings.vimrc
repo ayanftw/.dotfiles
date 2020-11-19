@@ -28,7 +28,7 @@ augroup END " }
 
 nnoremap <silent> <Leader>rts :call TrimWhiteSpace()<CR>
 
-nnoremap <leader>r :call NumberToggle()<cr>
+nnoremap <leader>r :Rg 
 
 cnoreabbrev <expr> W ((getcmdtype() is# ':' && getcmdline() is# 'W')?('w'):('W'))
 
