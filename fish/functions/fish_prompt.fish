@@ -1,41 +1,11 @@
-# Defined in /tmp/fish.m07MkQ/fish_prompt.fish @ line 2
-function fish_prompt --description 'Write out the prompt'
-	set -l last_status $status
-    # User
-    set_color $fish_color_user
-    echo -n (whoami)
-    set_color normal
+function fish_prompt
+    set --local exit_code $status  # save previous exit code
 
-    echo -n '@'
+    echo -e -n (_pure_prompt_beginning)  # init prompt context (clear current line, etc.)
+    echo -e (_pure_prompt_first_line)  # print current path, git branch/status, command duration
+    _pure_place_iterm2_prompt_mark # place iTerm shell integration mark
+    echo -e -n (_pure_prompt $exit_code)  # print prompt
+    echo -e (_pure_prompt_ending)  # reset colors and end prompt
 
-    # Host
-    set_color $fish_color_host
-    echo -n (prompt_hostname)
-    set_color normal
-
-    echo -n ':'
-
-    # PWD
-    set_color $fish_color_cwd
-    echo -n (prompt_pwd)
-    set_color normal
-
-    __terlar_git_prompt
-    __fish_hg_prompt
-
-    if set -q VIRTUAL_ENV
-        set_color blue
-        echo -n "  "(basename "$VIRTUAL_ENV")
-        set_color normal
-    end
-
-
-    echo
-
-    if not test $last_status -eq 0
-        set_color $fish_color_error
-    end
-
-    echo -n '➤ '
-    set_color normal
+    set _pure_fresh_session false
 end
