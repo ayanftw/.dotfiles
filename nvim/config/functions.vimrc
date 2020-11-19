@@ -24,3 +24,29 @@ function! NumberToggle()
     endif
 endfunc
 
+" turn terminal to normal mode with escape
+tnoremap <expr> <Esc> (&filetype == "fzf") ? "<Esc>" : "<c-\><c-n>"
+"au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+"au FileType fzf tunmap <buffer> <Esc>
+" start terminal in insert mode
+"au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" open terminal on ctrl+n
+function! OpenTerminal()
+  below split term://$SHELL
+  resize 10
+endfunction
+nnoremap <c-n> :call OpenTerminal()<CR>
+
+augroup terminal_settings
+    autocmd!
+
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd BufLeave term://* stopinsert
+
+    " Ignore various filetypes as those will close terminal automatically
+    " Ignore fzf, ranger, coc
+    autocmd TermClose term://*
+          \ if (expand('<afile>') !~ "fzf") && (expand('<afile>') !~ "ranger") && (expand('<afile>') !~ "coc") |
+          \   call nvim_input('<CR>')  |
+          \ endif
+augroup END
