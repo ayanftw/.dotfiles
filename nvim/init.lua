@@ -90,6 +90,18 @@ require("packer").startup(function()
 			})
 		end,
 	})
+	-- Lua
+	use({
+		"folke/todo-comments.nvim",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("todo-comments").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 	use("xiyaowong/nvim-transparent")
 	-- show keys
 	use({
@@ -108,9 +120,8 @@ require("packer").startup(function()
 	use("ggandor/lightspeed.nvim")
 	-- auto close html tags
 	use("windwp/nvim-ts-autotag")
-  use("windwp/nvim-autopairs")
+	use("windwp/nvim-autopairs")
 end)
-
 
 --Set highlight on search
 vim.o.hlsearch = false
@@ -203,13 +214,19 @@ require("gitsigns").setup({
 })
 
 -- Telescope
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
 require("telescope").setup({
 	defaults = {
 		mappings = {
 			i = {
 				["<C-u>"] = false,
 				["<C-d>"] = false,
+				["<C-t>"] = trouble.open_with_trouble,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
 			},
+			n = { ["<c-t>"] = trouble.open_with_trouble },
 		},
 	},
 })
@@ -435,7 +452,7 @@ lspconfig.sumneko_lua.setup({
 -- luasnip setup
 local luasnip = require("luasnip")
 -- autopairs
-require('nvim-autopairs').setup{}
+require("nvim-autopairs").setup({})
 local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 -- nvim-cmp setup
@@ -481,7 +498,7 @@ cmp.setup({
 		{ name = "luasnip" },
 	},
 
-  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({map_char={tex=''}})),
+	cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } })),
 
 	require("nvim-web-devicons").setup({
 		-- your personnal icons can go here (to override)
