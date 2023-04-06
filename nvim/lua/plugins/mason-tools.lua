@@ -7,9 +7,11 @@ return {
       start_delay = 3000,
       ensure_installed = {
         "black",
-        "isort",
-        "pylama",
+        -- "isort",
+        -- "pylama",
         "prettier",
+        "ruff-lsp",
+        "ruff",
         "djlint",
       },
     },

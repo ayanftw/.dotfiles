@@ -3,7 +3,36 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        pyright = {},
+        pyright = {
+          handlers = {
+            ["textDocument/publishDiagnostics"] = function() end,
+          },
+          on_attach = function(client, _)
+            client.server_capabilities.codeActionProvider = false
+          end,
+          settings = {
+            pyright = {
+              disableOrganizeImports = true,
+            },
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                typeCheckingMode = "basic",
+                useLibraryCodeForTypes = true,
+              },
+            },
+          },
+        },
+        ruff_lsp = {
+          on_attach = function(client, _)
+            client.server_capabilities.hoverProvider = false
+          end,
+          init_options = {
+            settings = {
+              args = {},
+            },
+          },
+        },
         bashls = {},
         tailwindcss = {},
         tsserver = {},
@@ -31,14 +60,18 @@ return {
         tsserver = function(_, opts)
           require("lazyvim.util").on_attach(function(client, buffer)
             if client.name == "tsserver" then
-          -- stylua: ignore
-          vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
+            -- stylua: ignore
+            vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
               vim.keymap.set(
                 "n",
                 "<leader>cR",
                 "<cmd>TypescriptRenameFile<CR>",
                 { desc = "Rename File", buffer = buffer }
               )
+            end
+            if client.name == "ruff_lsp" then
+              -- disable hover in favour of pyright
+              client.server_capabilities.hover = false
             end
           end)
           require("typescript").setup({ server = opts })
