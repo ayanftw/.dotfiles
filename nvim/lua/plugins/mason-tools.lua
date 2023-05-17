@@ -7,6 +7,7 @@ return {
       start_delay = 3000,
       ensure_installed = {
         "black",
+        "debugpy",
         -- "isort",
         -- "pylama",
         "prettier",

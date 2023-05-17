@@ -6,6 +6,7 @@ return {
         "cmake",
         "css",
         "dockerfile",
+        "htmldjango",
         "json",
         "json5",
         "scss",
