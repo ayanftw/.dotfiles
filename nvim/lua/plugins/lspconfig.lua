@@ -29,12 +29,14 @@ return {
           end,
           init_options = {
             settings = {
-              args = {},
+              args = { "--config=~/.config/ruff.pyproject.toml" },
             },
           },
         },
         bashls = {},
-        tailwindcss = {},
+        tailwindcss = {
+          filetypes_exclude = { "markdown" },
+        },
         tsserver = {},
         terraformls = {},
         lua_ls = {},
@@ -57,25 +59,12 @@ return {
         },
       },
       setup = {
-        tsserver = function(_, opts)
-          require("lazyvim.util").on_attach(function(client, buffer)
-            if client.name == "tsserver" then
-            -- stylua: ignore
-            vim.keymap.set("n", "<leader>co", "<cmd>TypescriptOrganizeImports<CR>", { buffer = buffer, desc = "Organize Imports" })
-              vim.keymap.set(
-                "n",
-                "<leader>cR",
-                "<cmd>TypescriptRenameFile<CR>",
-                { desc = "Rename File", buffer = buffer }
-              )
-            end
-            if client.name == "ruff_lsp" then
-              -- disable hover in favour of pyright
-              client.server_capabilities.hover = false
-            end
-          end)
-          require("typescript").setup({ server = opts })
-          return true
+        tailwindcss = function(_, opts)
+          local tw = require("lspconfig.server_configurations.tailwindcss")
+          --- @param ft string
+          opts.filetypes = vim.tbl_filter(function(ft)
+            return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
+          end, tw.default_config.filetypes)
         end,
       },
     },

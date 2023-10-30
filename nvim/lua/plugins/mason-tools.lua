@@ -8,9 +8,8 @@ return {
       ensure_installed = {
         "black",
         "debugpy",
-        -- "isort",
-        -- "pylama",
-        "prettier",
+        "helm-ls",
+        "prettierd",
         "ruff-lsp",
         "ruff",
         "djlint",
