@@ -4,3 +4,4 @@
 
 local opt = vim.opt
 opt.formatoptions = "jqlnt"
+opt.swapfile = false
