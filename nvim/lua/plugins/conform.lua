@@ -4,7 +4,7 @@ return {
   opts = {
     formatters_by_ft = {
       markdown = { { "prettierd", "prettier" } },
-      python = { "black", "ruff" },
+      python = { "ruff" },
       htmldjango = { "djlint" },
       svelte = { { "prettierd", "prettier" } },
     },
