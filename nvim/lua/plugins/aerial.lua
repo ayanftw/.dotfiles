@@ -40,6 +40,7 @@ return {
         nested_top = "│ ",
         whitespace = "  ",
       },
+      close_automatic_events = { "unfocus", "switch_buffer", "unsupported" },
     }
     return opts
   end,
