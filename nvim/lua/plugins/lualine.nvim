@@ -1,5 +1,13 @@
 opts = function(_, opts)
   local Util = require("lazyvim.util")
+  local trouble = require("trouble")
+  local symbols = trouble.statusline({
+      mode = "lsp_document_symbols",
+      groups = {}
+      title = false,
+      filter = { range = true },
+      format = "{kind_icon}{symbol.name:Normal}"
+    })
   local colors = {
     [""] = Util.fg("Special"),
     ["Normal"] = Util.fg("Special"),
@@ -21,4 +29,8 @@ opts = function(_, opts)
       return colors[status.status] or colors[""]
     end,
   })
+  table.insert(opts.sections.lualine_c, {
+      symbols.get,
+      cond = symbols.has,
+    })
 end

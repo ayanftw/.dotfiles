@@ -29,7 +29,7 @@ return {
           end,
           init_options = {
             settings = {
-              args = { "--config=~/.config/ruff.pyproject.toml" },
+              args = { "--config=" .. vim.fn.expand("~/.config/ruff.pyproject.toml") },
             },
           },
         },
