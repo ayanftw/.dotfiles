@@ -6,6 +6,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
   callback = function()
     vim.cmd("Trouble symbols open focus=false")
+    vim.cmd("Trouble lsp open focus=false win.position=right")
     vim.cmd("Trouble diagnostics open filter.buf=0")
   end,
 })

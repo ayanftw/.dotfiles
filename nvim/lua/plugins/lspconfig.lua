@@ -42,6 +42,8 @@ return {
         lua_ls = {},
         svelte = {},
         dockerls = {},
+        yamlls = {},
+        helm_ls = {},
         jsonls = {
           -- lazy-load schemastore when needed
           on_new_config = function(new_config)
