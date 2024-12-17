@@ -52,13 +52,13 @@ return {
         },
       },
       setup = {
-        tailwindcss = function(_, opts)
-          local tw = require("lspconfig.server_configurations.tailwindcss")
-          --- @param ft string
-          opts.filetypes = vim.tbl_filter(function(ft)
-            return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
-          end, tw.default_config.filetypes)
-        end,
+        -- tailwindcss = function(_, opts)
+        --   local tw = require("lspconfig.server_configurations.tailwindcss")
+        --   --- @param ft string
+        --   opts.filetypes = vim.tbl_filter(function(ft)
+        --     return not vim.tbl_contains(opts.filetypes_exclude or {}, ft)
+        --   end, tw.default_config.filetypes)
+        -- end,
         ruff_lsp = function()
           LazyVim.lsp.on_attach(function(client, _)
             if client.name == ruff then

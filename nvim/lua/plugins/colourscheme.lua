@@ -10,14 +10,14 @@ return {
           transparent = true,
         },
       })
-      local notify = require("notify")
-      notify.setup({
-        background_colour = "#000000",
-      })
+      -- local notify = require("notify")
+      -- notify.setup({
+      --   background_colour = "#000000",
+      -- })
     end,
   },
 
-  -- Configure LazyVim to load gruvbox
+  -- Configure LazyVim to load nordfox
   {
     "LazyVim/LazyVim",
     opts = {
